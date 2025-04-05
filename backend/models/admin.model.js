@@ -18,11 +18,6 @@ const adminSchema = new mongoose.Schema({
         lowercase: true,
         match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address'] 
       },
-      role:{
-        type:String,
-        enum:['student','recruiter','admin'],
-        required:true
-    },
       createdAt: {
         type: Date,
         default: Date.now
