@@ -26,6 +26,28 @@ const Login = () => {
         setInput({ ...input, [e.target.name]: e.target.value });
     }
 
+    // const submitHandler = async (e) => {
+    //     e.preventDefault();
+    //     try {
+    //         dispatch(setLoading(true));
+    //         const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
+    //             headers: {
+    //                 "Content-Type": "application/json"
+    //             },
+    //             withCredentials: true,
+    //         });
+    //         if (res.data.success) {
+    //             dispatch(setUser(res.data.user));
+    //             navigate("/");
+    //             toast.success(res.data.message);
+    //         }
+    //     } catch (error) {
+    //         console.log(error);
+    //         toast.error(error.response.data.message);
+    //     } finally {
+    //         dispatch(setLoading(false));
+    //     }
+    // }
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -36,23 +58,33 @@ const Login = () => {
                 },
                 withCredentials: true,
             });
+    
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
-                navigate("/");
-                toast.success(res.data.message);
+    
+                // Role-based navigation
+                if (input.role === "admin") {
+                    navigate("/college/admin-dashboard"); // Navigate to admin dashboard
+                    toast.success("Welcome Admin!");
+                } else {
+                    navigate("/"); // Navigate to default home
+                    toast.success(res.data.message);
+                }
             }
         } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
+            console.error(error);
+            toast.error(error.response?.data?.message || "An error occurred during login.");
         } finally {
             dispatch(setLoading(false));
         }
-    }
+    };
+    
     useEffect(()=>{
         if(user){
             navigate("/");
         }
     },[])
+
     return (
         <div>
             <Navbar />

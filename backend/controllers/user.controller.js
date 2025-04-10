@@ -4,6 +4,27 @@ import jwt from "jsonwebtoken";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 
+
+ export const getStudents= async (req, res) => {
+    try {
+        const students = await User.find().sort({ createdAt: -1 });
+        res.status(200).json({ students });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch students' });
+    }
+};
+
+export const deleteStudent= async(req,res) =>{
+    const { id } = req.params;
+
+    try {
+        await User.findByIdAndDelete(id);
+        res.status(200).json({ message: "Student deleted" });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to delete student' });
+    }
+}
+
 export const register = async (req, res) => {
     try {
         const { fullname, email, phoneNumber, password, role } = req.body;

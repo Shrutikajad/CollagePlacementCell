@@ -14,6 +14,10 @@ import AdminJobs from "./components/admin/AdminJobs";
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/ProtectedRoute'
+import AdminDashboard from './components/administative/AdminDashboard.jsx'
+import ManageStudents from './components/administative/ManageStudents'
+import ManageRecruiters from './components/administative/ManageRecruiters'
+
 
 
 const appRouter = createBrowserRouter([
@@ -70,7 +74,20 @@ const appRouter = createBrowserRouter([
     path:"/admin/jobs/:id/applicants",
     element:<ProtectedRoute><Applicants/></ProtectedRoute> 
   },
+  {
+    path:"/college/admin-dashboard",
+    element:<AdminDashboard></AdminDashboard>
+  },
+  {
+    path:"/administative/dashboard/managestudents",
+    element:<ManageStudents></ManageStudents>
+  },
+  {
+    path:"/administative/dashboard/managerecruiters",
+    element:<ManageRecruiters></ManageRecruiters>
+  },
 
+  
 ])
 function App() {
 
