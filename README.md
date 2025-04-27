@@ -68,7 +68,7 @@ README.md
 
 ⚙️ Setup Instructions
 1. Clone the repository
-git clone https://github.com/yourusername/college-placement-system.git
+git clone https://github.com/Shrutikajad/CollagePlacementCell
 cd college-placement-system
 
 2. Install dependencies
