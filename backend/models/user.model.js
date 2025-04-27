@@ -23,18 +23,18 @@ const userSchema = new mongoose.Schema({
         enum:['student','recruiter','admin'],
         required:true
     },
-    profile:{
-        bio:{type:String},
-        skills:[{type:String}],
-        branch: { type: String, required: true },
-        passingyear: { type: String, required: true },
-        cgpa: { type: String, required: true },
-        resume:{type:String}, // URL to resume file
-        resumeOriginalName:{type:String},
-        company:{type:mongoose.Schema.Types.ObjectId, ref:'Company'}, 
-        profilePhoto:{
-            type:String,
-            default:""
+    profile: {
+        bio: { type: String },
+        skills: [{ type: String }],
+        branch: { type: String }, // not required globally
+        passingyear: { type: Number }, // changed to Number
+        cgpa: { type: Number }, // changed to Number
+        resume: { type: String },
+        resumeOriginalName: { type: String },
+        company: { type: mongoose.Schema.Types.ObjectId, ref: 'Company' },
+        profilePhoto: {
+            type: String,
+            default: ""
         }
     },
 },{timestamps:true});

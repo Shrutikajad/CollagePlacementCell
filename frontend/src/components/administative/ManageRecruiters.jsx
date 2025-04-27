@@ -14,7 +14,7 @@ const ManageRecruiters = () => {
   useEffect(() => {
     const fetchRecruiters = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/admin/recruiters');
+        const res = await axios.get('http://localhost:8000/api/v1/user/recruiters');
         setRecruiters(res.data.recruiters);
       } catch (error) {
         console.error('Error fetching recruiters:', error);
@@ -25,7 +25,7 @@ const ManageRecruiters = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/admin/recruiters/${id}`);
+      await axios.delete(`http://localhost:8000/api/v1/user/recruiters/${id}`);
       setRecruiters(recruiters.filter(r => r._id !== id));
     } catch (error) {
       console.error('Error deleting recruiter:', error);

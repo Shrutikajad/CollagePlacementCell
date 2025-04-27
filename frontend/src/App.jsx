@@ -86,6 +86,10 @@ const appRouter = createBrowserRouter([
     path:"/administative/dashboard/managerecruiters",
     element:<ManageRecruiters></ManageRecruiters>
   },
+  // {
+  //   path:"/administative/dashboard",
+  //   element:<Dashboard></Dashboard>
+  // },
 
   
 ])

@@ -8,6 +8,7 @@ import { Download } from 'lucide-react';
 import { Home, Users, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from './AdminSidebar'
+import { Upload } from 'lucide-react';
 
 
 const ManageStudents = () => {
@@ -29,6 +30,23 @@ const ManageStudents = () => {
             console.error('Error fetching students:', error);
         }
     };
+    
+    const handleBulkUpload = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append('file', file);
+    
+        try {
+            await axios.post('http://localhost:8000/api/v1/user/students/bulk-upload', formData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+            alert('Students uploaded successfully!');
+            fetchStudents(); // refresh table
+        } catch (error) {
+            console.error('Error bulk uploading:', error);
+        }
+    };
+    
 
     const handleDelete = async (id) => {
         try {
@@ -46,7 +64,7 @@ const ManageStudents = () => {
 
     const handleSave = async () => {
         try {
-            await axios.put(`http://localhost:8000/api/v1/user/getStudentsDetails${editingId}`, editForm);
+            await axios.put(`http://localhost:8000/api/v1/user/getStudentsDetails/${editingId}`, editForm);
             setEditingId(null);
             fetchStudents(); // Refresh data
         } catch (error) {
@@ -202,7 +220,18 @@ const ManageStudents = () => {
                     <Button className="mb-4  right-0 mt-10 mr-5" onClick={handleDownload}>
                         <Download className="mr-2" size={16} /> Download CSV
                     </Button>
+
+                    <Button className="mb-4 mr-5" variant="secondary">
+    <label htmlFor="file-upload" className="cursor-pointer flex items-center">
+        <Upload size={16} className="mr-2" />
+        Bulk Upload CSV
+    </label>
+    <input id="file-upload" type="file" onChange={handleBulkUpload} className="hidden" />
+</Button>
+
                 </div>
+   
+
             </div>
         </div>
     );
